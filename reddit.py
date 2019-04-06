@@ -4,17 +4,16 @@ from maubot.handlers import command
 from typing import List, Tuple
 from random import choice
 import requests
-from http.client import responses
 
 class RedditPlugin(Plugin):
-    @command.passive("(r/)([a-zA-Z]+)", multiple=True)
+    @command.passive("(r/)(.+)", multiple=True)
     async def handler(self, evt: MessageEvent, subs: List[Tuple[str,str]]) -> None:
         await evt.mark_read()
         subreddits = [] #List of all subreddits given by user
         for _, r, sub_str in subs:
             link = 'https://reddit.com/r/{}'.format(sub_str)
             r = requests.head(link, headers={'User-agent':'redditmaubot'}, allow_redirects=True)
-            if ("/r/" in r.url):
+            if ("/r/" in r.url and r.status_code != 404):
                 #Check if subreddit exists
                 subreddits.append(link)
 
