@@ -1,16 +1,16 @@
 from random import choice
 from typing import List, Tuple
+import urllib.parse
 from maubot import Plugin, MessageEvent
 from maubot.handlers import command
 
-
 class RedditPlugin(Plugin):
-    @command.passive("(r/)(.+)", multiple=True)
+    @command.passive("(r/)([^\s]+)", multiple=True)
     async def handler(self, evt: MessageEvent, subs: List[Tuple[str, str]]) -> None:
         await evt.mark_read()
         subreddits = []  # List of all subreddits given by user
         for _, rslash, sub_str in subs:
-            link = "https://reddit.com/r/{}".format(sub_str)
+            link = "https://reddit.com/r/{}".format(urllib.parse.quote(sub_str))
 
             async with self.http.head(
                 link, headers={"User-agent": "redditmaubot"}, allow_redirects=True
