@@ -5,7 +5,7 @@ from maubot import Plugin, MessageEvent
 from maubot.handlers import command
 
 class RedditPlugin(Plugin):
-    @command.passive("(r/)([^\s]+)", multiple=True)
+    @command.passive("(^r\/)([^\s]+)", multiple=True)
     async def handler(self, evt: MessageEvent, subs: List[Tuple[str, str]]) -> None:
         await evt.mark_read()
         subreddits = []  # List of all subreddits given by user
