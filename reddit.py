@@ -35,4 +35,4 @@ class RedditPlugin(Plugin):
                 f"{all_subs} is probably what you're looking for",
             ]
             response = f"{choice(condescending)}"
-            await evt.reply(response, html_in_markdown=True)  # Reply to user
+            await evt.reply(response, allow_html=True)  # Reply to user
