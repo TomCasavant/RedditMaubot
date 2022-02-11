@@ -6,12 +6,12 @@ from maubot.handlers import command
 
 
 class RedditPlugin(Plugin):
-    @command.passive("((^| )r\/)([^\s]+)", multiple=True)
+    @command.passive("((^| )r\/)([^\s^,^.]+)", multiple=True)
     async def handler(self, evt: MessageEvent, subs: List[Tuple[str, str]]) -> None:
         await evt.mark_read()
         subreddits = []  # List of all subreddits given by user
         for _, r_slash, __, sub_str in subs:
-            link = "https://reddit.com/r/{}".format(urllib.parse.quote(sub_str))
+            link = "https://reddit.com/r/{}".format(urllib.parse.quote(sub_str.lower()))
 
             async with self.http.head(
                 link, headers={"User-agent": "redditmaubot"}, allow_redirects=True
