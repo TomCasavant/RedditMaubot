@@ -1,5 +1,5 @@
 from random import choice
-from typing import List, Tuple
+from typing import List, Tuple, Type
 import urllib.parse
 from maubot import Plugin, MessageEvent
 from maubot.handlers import command

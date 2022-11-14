@@ -32,8 +32,8 @@ main_class: RedditPlugin
 database: false
 
 #  Extra files that the upcoming build tool should include in the mbp file.
-#extra_files:
-#- base-config.yaml
+extra_files:
+  - base-config.yaml
 #- LICENSE
 
 # List of dependencies
